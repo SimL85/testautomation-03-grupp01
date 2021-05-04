@@ -1,0 +1,163 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-04-28T19:16:50.383Z",
+    "end": "2021-04-28T19:17:25.644Z",
+    "duration": 35261,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fc5aea2e-e9e5-4ce4-8a40-cb60be57edba",
+      "title": "",
+      "fullFile": "cypress/integration/testsuite.spec.js",
+      "file": "cypress/integration/testsuite.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0544eff9-1daa-4d83-8ff3-1bc4499220fb",
+          "title": "Testsuite with Page-Objet",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Client registration (TC2)",
+              "fullTitle": "Testsuite with Page-Objet Client registration (TC2)",
+              "timedOut": null,
+              "duration": 9819,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "indexPage.viewClients('Clients');\nclientsPage.viewClientNew('New Client');\ncy.wait(1000);\nclientNewPage.createClient('Pina Colada', 'pinacolada@gmail.com', '0701233234', 'Clients');\ncy.wait(1000);\ncy.percySnapshot('New client');\ncy.wait(1000);\nclientsPage.verifyLastClient('Pina Colada', 'pinacolada@gmail.com', '0701233234');",
+              "err": {},
+              "uuid": "22cd34f0-c445-423a-a880-c5df3e4e5d73",
+              "parentUUID": "0544eff9-1daa-4d83-8ff3-1bc4499220fb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Edit the last Client (TC3)",
+              "fullTitle": "Testsuite with Page-Objet Edit the last Client (TC3)",
+              "timedOut": null,
+              "duration": 7277,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "indexPage.viewClients('Clients');\nclientsPage.verifyEditLastClient('Client:');\nclientEditPage.editClient('pinacolada@yahoo.se', 'Clients');\nclientsPage.verifyLastClient('Pina Colada', 'pinacolada@yahoo.se', '0701233234');\ncy.wait(1000);\ncy.percySnapshot('Edit client');\ncy.wait(1000);",
+              "err": {},
+              "uuid": "19076d25-cee3-4b50-ba1a-29597bc70c61",
+              "parentUUID": "0544eff9-1daa-4d83-8ff3-1bc4499220fb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete the last Client (TC4)",
+              "fullTitle": "Testsuite with Page-Objet Delete the last Client (TC4)",
+              "timedOut": null,
+              "duration": 8177,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "indexPage.viewClients('Clients');\ncy.percySnapshot('Delete client');\ncy.wait(1000);\nclientsPage.deleteLastClient('Clients');\ncy.wait(1000);\ncy.percySnapshot('Delete client confermation');\ncy.wait(1000);",
+              "err": {},
+              "uuid": "631b9ed1-7b70-43b6-9936-475f4fc03989",
+              "parentUUID": "0544eff9-1daa-4d83-8ff3-1bc4499220fb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Create a bill (TC5)",
+              "fullTitle": "Testsuite with Page-Objet Create a bill (TC5)",
+              "timedOut": null,
+              "duration": 7542,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "indexPage.viewBills('Bills');\ncy.percySnapshot('Creating a bill');\ncy.wait(1000);\nbillsPage.viewBillNew('New Bill');\nbillsNewPage.createBill('5000', 'Bills');\ncy.percySnapshot('Creating a bill');\ncy.wait(1000);\nbillsPage.verifyLastBill('5000');",
+              "err": {},
+              "uuid": "ce5cd146-32f3-4e57-aba9-093e910694e8",
+              "parentUUID": "0544eff9-1daa-4d83-8ff3-1bc4499220fb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "22cd34f0-c445-423a-a880-c5df3e4e5d73",
+            "19076d25-cee3-4b50-ba1a-29597bc70c61",
+            "631b9ed1-7b70-43b6-9936-475f4fc03989",
+            "ce5cd146-32f3-4e57-aba9-093e910694e8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 32815,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/m-report",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "timestamp": "yyyy/mm/dd_HHMMss"
+      },
+      "version": "5.2.0"
+    }
+  }
+}
