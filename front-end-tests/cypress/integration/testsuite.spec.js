@@ -134,7 +134,7 @@ describe("Testsuite", () => {
 
    });
    it("Delete the last room", () => {
-      
+
       indexFunctions.openRoomsPage('Rooms')
       roomsFunctions.removeLastRoom()
 
