@@ -1,13 +1,28 @@
 /// <reference types="cypress" />
 
+//-----------------------------------------------------------------//
+//                          imports                                //
+//-----------------------------------------------------------------//
 
-import * as loginPage from "../pages/loginPage"
-import * as indexPage from "../pages/index-page"
-import * as clientsPage from "../pages/clients-page"
-import * as newClientPage from "../pages/new-client-page"
-import * as roomsPage from "../pages/editRoomsPage"
-import * as newRoomPage from "../pages/new-room-page"
+import * as loginFunctions from '../pages/loginPage'
+import * as headerFunctions from '../pages/headerPage'
+import * as indexFunctions from '../pages/indexPage'
+import * as clientsFunctions from '../pages/clientsPage'
+import * as newClientFunctions from '../pages/newClientPage'
+import * as billsFunctions from '../pages/billsPage'
+import * as newBillFunctions from '../pages/newBillPage'
+import * as roomsFunctions from '../pages/roomsPage'
+import * as newRoomFunctions from '../pages/newRoomPage'
+import * as reservationsFunctions from '../pages/reservationsPage'
+import * as newReservationFunctions from '../pages/newReservationPage'
+import * as editRoomsFunctions from "../pages/editRoomsPage"
+import * as editBillsFunctions from "../pages/editBillsPage"
+import * as editClientsFunctions from "../pages/editClientsPage"
 import * as targets from "../targets/targets"
+
+//-----------------------------------------------------------------//
+//                          variables                              //
+//-----------------------------------------------------------------//
 
 var faker = require('faker');
 
@@ -33,23 +48,23 @@ let randomFloor2 = faker.datatype.number({min: 1, max: 50})
 let randomPrice2 = faker.datatype.number({min: 1000, max: 10000})
 let randomFeature2 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
 
+//-----------------------------------------------------------------//
+//                          test cases                             //
+//-----------------------------------------------------------------//
 
 describe("Testsuite", () => {
     beforeEach(() => {
-      cy.visit(baseUrl)
-         loginPage.confirmHeader("Login")
-         // cy.wait(500)
-         // cy.percySnapshot("Login page");
-      loginPage.loginUser(targets.username, targets.password, "Tester Hotel Overview")
-         // cy.wait(500)
-         // cy.percySnapshot("Tester Hotel Overview");
+      cy.visit('/')
+      loginFunctions.checkElements()
+      loginFunctions.validLogin(targets.username, targets.password, "Tester Hotel Overview")
+     
     });
 
 
 
 /// TESTS FOR CLIENTS ///
 
-        it("Create a new client", () => {
+        it.only("Create a new client", () => {
           indexPage.viewClients("Clients")
             //  cy.wait(500)
              // cy.percySnapshot("Clients page");
@@ -152,12 +167,11 @@ describe("Testsuite", () => {
 
 
 
-    //after(() => {
-    //      indexPage.logoutUser("Login")         
-    //});
-  //afterEach(() => {
-  //    indexPage.logoutUser("Login")         
-  //          });
+
+  afterEach(() => {
+   headerFunctions.performLogout()         
+ 
+});
 
 
 });
