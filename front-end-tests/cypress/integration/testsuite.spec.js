@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import * as loginPage from "../pages/login-page"
+import * as loginPage from "../pages/loginPage"
 import * as indexPage from "../pages/index-page"
 import * as clientsPage from "../pages/clients-page"
 import * as newClientPage from "../pages/new-client-page"
