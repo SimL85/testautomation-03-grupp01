@@ -1,5 +1,6 @@
 {
-  "name": "front-end",
+  "name": "front-end-tests",
+
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,15 +13,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.48",
-    "@percy/cypress": "^3.1.0",
-    "cypress": "^7.1.0",
-    "faker": "^5.5.3",
-    "mochawesome": "^6.2.2",
-    "mochawesome-merge": "^4.2.0",
-    "mochawesome-report-generator": "^5.2.0"
-  },
-  "dependencies": {
-    "mocha": "^5.2.0"
+
+    "cypress": "^7.2.0",
+    "faker": "^5.5.3"
   }
 }
+

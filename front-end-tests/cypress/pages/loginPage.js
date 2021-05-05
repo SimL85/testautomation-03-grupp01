@@ -1,29 +1,38 @@
 /// <reference types="cypress" />
 
-//Elements
-const HEADER = "h2"
-const USERNAME_FIELD = ":nth-child(1) > input"
-const PASSWORD_FIELD = ":nth-child(2) > input"
-const LOGIN_BUTTON = ".btn"
 
-//Functions
+// login page elements
+const HEADER_TITLE = '.router-link-active'
+const USERNAME_TEXTFIELD = ':nth-child(1) > input'
+const USERNAME_LABEL = ':nth-child(1) > label'
+const PASSWORD_TEXTFIELD = ':nth-child(2) > input'
+const PASSWORD_LABEL = ':nth-child(2) > label'
+const LOGIN_BUTTON = '.btn'
+const MAIN_PAGE_TITLE = 'h2'
 
-function confirmHeader(content) {
-    cy.get(HEADER).should("contain", content)
+// actions / methods / functions
+function checkElements(){
+    cy.get(HEADER_TITLE).contains('Tester Hotel')
+    cy.get(USERNAME_LABEL).should('have.text','Username:').should('have.css', 'text-transform', 'uppercase')
+    cy.get(PASSWORD_LABEL).should('have.text','Password:').should('have.css', 'text-transform', 'uppercase')
 }
 
-function loginUser(userName, password, content) {
-    cy.get(USERNAME_FIELD).type(userName)
-    cy.get(PASSWORD_FIELD).type(password)
+function validLogin(username, password, content){
+    cy.get(USERNAME_TEXTFIELD).type(username)
+    cy.get(PASSWORD_TEXTFIELD).type(password)
+    cy.get(LOGIN_BUTTON).click()    
+    cy.get(MAIN_PAGE_TITLE).should('have.text', content)
+}
+
+function login(username, password){
+    cy.get(USERNAME_TEXTFIELD).type(username)
+    cy.get(PASSWORD_TEXTFIELD).type(password)
     cy.get(LOGIN_BUTTON).click()
-    cy.get(HEADER).should("contain", content)
-    cy.wait(500)
-    
 }
 
-
-//Exports
-exports.default = {
-    confirmHeader,
-    loginUser
+// export functions
+module.exports = {
+    checkElements,
+    validLogin,
+    login
 }
