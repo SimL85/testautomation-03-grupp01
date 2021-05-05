@@ -39,7 +39,6 @@ let randomPrice2 = faker.datatype.number({ min: 1000, max: 10000 })
 let randomFeature2 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
 let randomFeature3 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
 
-
 //-----------------------------------------------------------------//
 //                          test cases                             //
 //-----------------------------------------------------------------//
@@ -57,6 +56,38 @@ describe("Testsuite", () => {
       headerFunctions.performLogout()
 
    });
+
+
+   /// TESTS FOR CLIENTS ///
+
+   it("Create a new client", () => {
+      indexFunctions.openClientsPage()
+      clientsFunctions.openNewClientPage()
+      newClientFunctions.validateNewClientPage()
+      newClientFunctions.createNewClient(randomName, randomMail, randomPhone)
+      clientsFunctions.validateCreatedClient(randomName, randomMail, randomPhone)
+
+      cy.wait(500)
+   });
+
+
+
+   it("Edit last client", () => {
+      indexFunctions.openClientsPage()
+      editClientsFunctions.editClient(randomName2, randomMail2, randomPhone2, "Clients")
+      clientsFunctions.validateCreatedClient(randomName2, randomMail2, randomPhone2)
+
+      cy.wait(500)
+   });
+
+
+   it("Delete last client", () => {
+      indexFunctions.openClientsPage("Clients")
+      clientsFunctions.removeLastClient()
+
+      cy.wait(500)
+   });
+
 
    it('Create a room ', () => {
       indexFunctions.openRoomsPage('Rooms')
