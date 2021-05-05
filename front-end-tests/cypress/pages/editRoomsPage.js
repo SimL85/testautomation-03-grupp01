@@ -66,18 +66,12 @@ function editLastRoom(category, number, floor, price, feature, content1) {
 
 }
 
-function deleteLastRoom() {
-    // cy.get(CLIENT_LIST).last()
-     cy.get(DROP_DOWN_BTN).last().click()
-     cy.get(DELETE_BTN).click()
- 
- }
+
 
 //Exports
 exports.default = {
    viewNewRoom,
    verifyLastRoom,
    editLastRoom,
-   deleteLastRoom
    
 }
