@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+
 //Elements
 const CREATE_ROOM_BTN = "h2 > .btn"
 const ROOM_LIST = ".room"
@@ -74,4 +75,5 @@ exports.default = {
    verifyLastRoom,
    editLastRoom,
    
+
 }
