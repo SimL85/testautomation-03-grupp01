@@ -4,7 +4,7 @@ import * as loginPage from "../pages/login-page"
 import * as indexPage from "../pages/index-page"
 import * as clientsPage from "../pages/clients-page"
 import * as newClientPage from "../pages/new-client-page"
-import * as roomsPage from "../pages/rooms-page"
+import * as roomsPage from "../pages/editRoomsPage"
 import * as newRoomPage from "../pages/new-room-page"
 import * as targets from "../targets/targets"
 
@@ -35,7 +35,7 @@ let randomFeature2 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view'
 
 describe("Testsuite", () => {
     beforeEach(() => {
-      cy.visit(targets.base_url)
+      cy.visit(baseUrl)
          loginPage.confirmHeader("Login")
          // cy.wait(500)
          // cy.percySnapshot("Login page");
