@@ -32,6 +32,10 @@ let randomName = faker.name.findName();
 let randomEmail = faker.internet.email().toLowerCase();
 let randomPhone = faker.phone.phoneNumber();
 let billValue = faker.datatype.number({ min: 500, max: 1000 });
+
+let randomName2 = faker.name.findName();
+let randomEmail2 = faker.internet.email().toLowerCase();
+let randomPhone2 = faker.phone.phoneNumber();
   
 let randomCategory = faker.random.arrayElement(["double", "single", "twin"]);
 let randomNumber = faker.datatype.number({ min: 1, max: 1000 })
@@ -82,8 +86,8 @@ describe("Testsuite", () => {
       indexFunctions.openClientsPage()
       clientsFunctions.openNewClientPage()
       newClientFunctions.validateNewClientPage()
-      newClientFunctions.createNewClient(randomName, randomMail, randomPhone)
-      clientsFunctions.validateCreatedClient(randomName, randomMail, randomPhone)
+      newClientFunctions.createNewClient(randomName, randomEmail, randomPhone)
+      clientsFunctions.validateCreatedClient(randomName, randomEmail, randomPhone)
 
       cy.wait(500)
    });
@@ -92,8 +96,8 @@ describe("Testsuite", () => {
 
    it("Edit last client", () => {
       indexFunctions.openClientsPage()
-      editClientsFunctions.editClient(randomName2, randomMail2, randomPhone2, "Clients")
-      clientsFunctions.validateCreatedClient(randomName2, randomMail2, randomPhone2)
+      editClientsFunctions.editClient(randomName2, randomEmail2, randomPhone2, "Clients")
+      clientsFunctions.validateCreatedClient(randomName2, randomEmail2, randomPhone2)
 
       cy.wait(500)
    });
@@ -112,6 +116,9 @@ describe("Testsuite", () => {
       roomsFunctions.openNewRoomPage()
       cy.wait(1000)
       newRoomFunctions.createAvailableRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3])
+      if (randomFeature == "sea_view") {
+         randomFeature = "sea view"
+      }
       roomsFunctions.validateAvailableRoom(randomCategory, randomNumber, randomFloor, 'true', randomFeature)
       cy.wait(1000)
 
@@ -120,6 +127,16 @@ describe("Testsuite", () => {
    it("Edit a room", () => {
       indexFunctions.openRoomsPage('Rooms')
       editRoomsFunctions.editLastRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3], 'Rooms')
+      if (randomFeature == "sea_view") {
+         randomFeature = "sea view"
+      }
+      roomsFunctions.validateAvailableRoom(randomCategory, randomNumber, randomFloor, 'false', randomFeature)
+
+   });
+   it("Delete the last room", () => {
+
+      indexFunctions.openRoomsPage('Rooms')
+      roomsFunctions.removeLastRoom()
 
    });
   
@@ -162,9 +179,9 @@ describe("Testsuite", () => {
       headerFunctions.backToIndex()
 
       // create new available room
-      indexFunctions.openRoomsPage()
+      indexFunctions.openRoomsPage('Rooms')
       roomsFunctions.openNewRoomPage()
-      newRoomFunctions.createAvailableRoom(category, roomNumber, floor, price, features)
+      newRoomFunctions.createAvailableRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3])
       headerFunctions.backToIndex()
 
       // create reservation
@@ -185,7 +202,7 @@ describe("Testsuite", () => {
       clientsFunctions.removeLastClient()
       cy.wait(1000)
       headerFunctions.backToIndex()
-      indexFunctions.openRoomsPage()
+      indexFunctions.openRoomsPage('Rooms')
       roomsFunctions.removeLastRoom()
       cy.wait(1000)
       headerFunctions.backToIndex()
