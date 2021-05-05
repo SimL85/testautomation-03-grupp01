@@ -4,13 +4,13 @@ import * as loginIndex from '../pages/login-page'
 import * as indexPage from '../pages/index-page'
 import * as clientsPage from '../pages/clients-page'
 import * as clientNewPage from '../pages/client-new-page'
-import * as clientEditPage from '../pages/client-edit-page'
+import * as clientEditPage from '../pages/EditClientsPage'
 import * as billsPage from '../pages/bills-page'
 import * as billsNewPage from '../pages/bills-new-page'
 import * as billsEditPage from '../pages/editBillsPage'
 import * as roomsPage from '../pages/rooms-page'
 import * as roomsNewPage from '../pages/rooms-new-page'
-import * as roomEditPage from '../pages/rooms-edit-page'
+import * as roomEditPage from '../pages/editRoomsPage'
 
 var faker = require('faker')
 
