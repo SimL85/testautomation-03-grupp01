@@ -1,181 +1,164 @@
 /// <reference types="cypress" />
 
-import * as loginIndex from '../pages/login-page'
-import * as indexPage from '../pages/index-page'
-import * as clientsPage from '../pages/clients-page'
-import * as clientNewPage from '../pages/client-new-page'
-import * as clientEditPage from '../pages/editClientsPage'
-import * as billsPage from '../pages/bills-page'
-import * as billsNewPage from '../pages/bills-new-page'
-import * as billsEditPage from '../pages/editBillsPage'
-import * as roomsPage from '../pages/rooms-page'
-import * as roomsNewPage from '../pages/rooms-new-page'
-import * as roomEditPage from '../pages/editRoomsPage'
 
-var faker = require('faker')
+import * as loginPage from "../pages/loginPage"
+import * as indexPage from "../pages/index-page"
+import * as clientsPage from "../pages/clients-page"
+import * as newClientPage from "../pages/new-client-page"
+import * as roomsPage from "../pages/editRoomsPage"
+import * as newRoomPage from "../pages/new-room-page"
+import * as targets from "../targets/targets"
 
-let randomName = faker.name.findName()
-let randomMail = faker.internet.email()
-let randomPhone = faker.phone.phoneNumber()
-let randomValue = faker.datatype.number()
+var faker = require('faker');
 
-describe('Testsuite ', () => {
+let randomName = faker.name.findName();
+let randomMail = faker.internet.email();
+let randomPhone = faker.phone.phoneNumber();
 
-
-    beforeEach('login (TC1)', () => {
-        cy.visit('/')
-        loginIndex.confirmHeader('Login')
-        loginIndex.loginUser('tester01', 'GteteqbQQgSr88SwNExUQv2ydb7xuf8c', 'Tester Hotel Overview')
-        cy.percySnapshot('Login')
-        cy.wait(1000)
-
-    })
+let randomName2 = faker.name.findName();
+let randomMail2 = faker.internet.email();
+let randomPhone2 = faker.phone.phoneNumber();
+//let checkbox = " ✓ "    // "baseUrl": "http://localhost:3000",
 
 
-    afterEach('Logout (TC1)', () => {
-        indexPage.logoutUser('Login')
-        cy.percySnapshot('Logout')
+let randomCategory = faker.random.arrayElement(["double","single","twin"]);
+let randomNumber = faker.datatype.number({min: 1, max: 1000})
+let randomFloor = faker.datatype.number({min: 1, max: 50})
+let randomPrice = faker.datatype.number({min: 1000, max: 10000})
+let randomFeature = faker.random.arrayElement(["balcony","ensuite","sea_view","penthouse"]);
 
-    })
+let randomCategory2 = faker.random.arrayElement(["double","single","twin"]);
+let randomNumber2 = faker.datatype.number({min: 1, max: 1000})
+let randomFloor2 = faker.datatype.number({min: 1, max: 50})
+let randomPrice2 = faker.datatype.number({min: 1000, max: 10000})
+let randomFeature2 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
 
-    it('Client registration (TC2)', () => {
-        indexPage.viewClients('Clients')
-        clientsPage.viewClientNew('New Client')
-        clientNewPage.createClient('Pina Colada', 'pinacolada@gmail.com', '0701233234', 'Clients')
-        cy.wait(1000)
-        cy.percySnapshot('New client')
-        cy.wait(1000)
-        clientsPage.verifyLastClient('Pina Colada', 'pinacolada@gmail.com', '0701233234')
-    })
 
-    it('Edit the last Client (TC3)', () => {
-        indexPage.viewClients('Clients')
-        clientsPage.verifyEditLastClient('Client:')
-        clientEditPage.editClient('pinacolada@yahoo.se', 'Clients')
-        clientsPage.verifyLastClient('Pina Colada', 'pinacolada@yahoo.se', '0701233234')
-        cy.wait(1000)
-        cy.percySnapshot('Edit client')
-        cy.wait(1000)
+describe("Testsuite", () => {
+    beforeEach(() => {
+      cy.visit(baseUrl)
+         loginPage.confirmHeader("Login")
+         // cy.wait(500)
+         // cy.percySnapshot("Login page");
+      loginPage.loginUser(targets.username, targets.password, "Tester Hotel Overview")
+         // cy.wait(500)
+         // cy.percySnapshot("Tester Hotel Overview");
+    });
 
-    })
 
-    it('Delete the last Client (TC4)', () => {
-        indexPage.viewClients('Clients')
-        cy.percySnapshot('Delete client')
-        cy.wait(1000)
-        clientsPage.deleteLastClient('Clients')
-        cy.wait(1000)
-        cy.percySnapshot('Delete client confermation')
-        cy.wait(1000)
-    })
 
-    it('Create a bill (TC5)', () => {
-        indexPage.viewBills('Bills')
-        billsPage.viewBillNew('New Bill')
-        billsNewPage.createBill('5000', 'Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Creating a bill')
-        cy.wait(1000)
-        billsPage.verifyLastBill('5000')
-    })
+/// TESTS FOR CLIENTS ///
 
-    it('Edit the last bill (TC6)', () => {
-        indexPage.viewBills('Bills')
-        billsPage.verifyEditLastBill('Bill:')
-        cy.wait(1000)
-        cy.percySnapshot('Edit a bill')
-        cy.wait(1000)
-        billsEditPage.editLastBill('4500', 'Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Verify edit a bill')
-        cy.wait(1000)
-        billsPage.verifyLastBill('4500')
-    })
+        it("Create a new client", () => {
+          indexPage.viewClients("Clients")
+            //  cy.wait(500)
+             // cy.percySnapshot("Clients page");
+          clientsPage.viewNewClient("New Client")
+             // cy.wait(500)
+             // cy.percySnapshot("New Client Page");
+          newClientPage.createNewClient(randomName, randomMail, randomPhone, "Clients")
+          clientsPage.verifyLastClient(randomName, randomMail, randomPhone)
+             // cy.wait(500)
+             // cy.percySnapshot("New Client is created and verified")
+          cy.wait(500)
+        });
 
-    it('Delete the last bill (TC7)', () => {
-        indexPage.viewBills('Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Delete a bill')
-        cy.wait(1000)
-        billsPage.deleteLastBill('Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Verify delete a bill')
-        cy.wait(1000)
-    })
+ 
 
-    it('Create a room (TC8)', () => {
-        indexPage.viewRooms('Rooms')
-        roomsPage.viewRoomNew('New Room')
-        cy.wait(1000)
-        cy.percySnapshot('Create a room')
-        cy.wait(1000)
-        roomsNewPage.createRoom('Twin', '1101', '11', '4000', ['Balcony', 'Ensuite', 'Penthouse'], 'Rooms')
-        cy.wait(1000)
-        cy.percySnapshot('Verify create a room')
-        cy.wait(1000)
-        roomsPage.verifyLastRoom('twin', '1101', '11', '4000', 'balcony')
-    })
+        it("Edit last client", () => {
+          indexPage.viewClients("Clients")
+             // cy.wait(500)
+             // cy.percySnapshot("Clients page");
+          clientsPage.editLastClient(randomName2, randomMail2, randomPhone2, "Clients")
+          clientsPage.verifyLastClient(randomName2, randomMail2, randomPhone2, "Clients")
+             // cy.wait(500)
+             // cy.percySnapshot("Last Client is edited and verified");
+          cy.wait(500)
+        });
 
-    it('Edit the last room (TC9)', () => {
-        indexPage.viewRooms('Rooms')
-        roomsPage.verifyEditLastRoom('Room:')
-        roomEditPage.editRoom('1230', '12', 'Rooms')
-        cy.wait(1000)
-        cy.percySnapshot('Edit a room')
-        cy.wait(1000)
-        roomsPage.verifyLastRoom('twin', '1230', '12', '4000', 'balcony')
-        cy.wait(1000)
-        cy.percySnapshot('Verify edit a room')
-        cy.wait(1000)
+      
+        it("Delete last client", () => {
+          indexPage.viewClients("Clients")
+             // cy.wait(500)
+             // cy.percySnapshot("Clients page");
+          //clientsPage.viewNewClient("New Client")
+          clientsPage.deleteLastClient()
+             // cy.wait(500)
+             // cy.percySnapshot("Last Client is removed");
+          cy.wait(500)
+        });
+  
 
-    })
+ /// TESTS FOR ROOMS ///
 
-    it('Delete the last room (TC10)', () => {
-        indexPage.viewRooms('Rooms')
-        roomsPage.deleteLastRoom('Rooms')
-        cy.wait(1000)
-        cy.percySnapshot('Delete a room')
-        cy.wait(1000)
-    })
+  
+  
+        it("Create a new room", () => {
+          indexPage.viewRooms("Rooms")
+             // cy.wait(500)
+             // cy.percySnapshot("Rooms page");
+          roomsPage.viewNewRoom("New Room")
+             // cy.wait(500)
+             // cy.percySnapshot("New Room Page");
+          newRoomPage.createNewRoom(randomCategory,randomNumber,randomFloor, randomPrice, randomFeature,"Rooms")
+          cy.wait(500)
+          if (randomFeature == "sea_view") {
+            randomFeature = "sea view"
+          }
+          roomsPage.verifyLastRoom(randomCategory,randomNumber,randomFloor, randomPrice, randomFeature) 
+             // cy.wait(500)
+             // cy.percySnapshot("New Room is created and verified");
+          cy.wait(500)
+   
+        });
 
-    it('Client registration (TC2) with faker', () => {
-        indexPage.viewClients('Clients')
-        clientsPage.viewClientNew('New Client')
-        clientNewPage.createClient(randomName, randomMail, randomPhone, 'Clients')
-        cy.wait(1000)
-        cy.percySnapshot('New client faker')
-        cy.wait(1000)
-        clientsPage.verifyLastClient(randomName, randomMail, randomPhone,)
-    })
+        it("Edit last room", () => {
 
-    it('Edit the last Client (TC3) with faker', () => {
-        indexPage.viewClients('Clients')
-        clientsPage.verifyEditLastClient('Client:')
-        clientEditPage.editClient(randomMail, 'Clients')
-        cy.wait(1000)
-        cy.percySnapshot('Edit client faker')
-        cy.wait(1000)
-        clientsPage.verifyLastClient(randomName, randomMail, randomPhone)
+          indexPage.viewRooms("Rooms")
+             // cy.wait(500)
+             // cy.percySnapshot("Rooms page");
+          roomsPage.editLastRoom(randomCategory2,randomNumber2,randomFloor2, randomPrice2, randomFeature2,"Rooms")
+          cy.wait(500)
+          if (randomFeature2 == "sea_view") {
+            randomFeature2 = "sea view"
+          }
+          roomsPage.verifyLastRoom(randomCategory2,randomNumber2,randomFloor2, randomPrice2, randomFeature2)
+             // cy.wait(500)
+             // cy.percySnapshot("Last room is edited and verified");
+          cy.wait(500)
 
-    })
+        });
+       
+        it("Delete last room", () => {
+          indexPage.viewRooms("Rooms")
+             // cy.wait(500)
+             // cy.percySnapshot("Rooms page");
+          //clientsPage.viewNewClient("New Client")
+          roomsPage.deleteLastRoom()
+            // cy.wait(500)
+            // cy.percySnapshot("Last Room is removed");
+          cy.wait(500)
+       
+        });
+        
+        it("Logout", () => {
+          indexPage.logoutUser("Login")
+            // cy.wait(500)
+            // cy.percySnapshot("User logges out and returns to Login page");
+          cy.wait(500)
+       
+        });
+  
 
-    it('Create a bill (TC5) with faker', () => {
-        indexPage.viewBills('Bills')
-        billsPage.viewBillNew('New Bill')
-        billsNewPage.createBill(randomValue, 'Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Creating a bill with faker')
-        cy.wait(1000)
-        billsPage.verifyLastBill(randomValue)
-    })
 
-    it('Edit the last bill (TC6) with faker', () => {
-        indexPage.viewBills('Bills')
-        billsPage.verifyEditLastBill('Bill:')
-        billsEditPage.editLastBill(randomValue, 'Bills')
-        cy.wait(1000)
-        cy.percySnapshot('Edit a bill with faker')
-        cy.wait(1000)
-        billsPage.verifyLastBill(randomValue)
-    })
-})
+
+    //after(() => {
+    //      indexPage.logoutUser("Login")         
+    //});
+  //afterEach(() => {
+  //    indexPage.logoutUser("Login")         
+  //          });
+
+
+});
+
