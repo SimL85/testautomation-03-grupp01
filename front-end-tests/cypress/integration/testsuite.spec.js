@@ -45,6 +45,7 @@ let randomFeature3 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view'
 //-----------------------------------------------------------------//
 
 describe("Testsuite", () => {
+
    beforeEach(() => {
       cy.visit('/')
       loginFunctions.checkElements()
@@ -52,33 +53,26 @@ describe("Testsuite", () => {
 
    });
 
+   afterEach(() => {
+      headerFunctions.performLogout()
+
+   });
 
    it('Create a room ', () => {
       indexFunctions.openRoomsPage('Rooms')
       roomsFunctions.openNewRoomPage()
       cy.wait(1000)
-      newRoomFunctions.createAvailableRoom(randomCategory,randomNumber,randomFloor,randomPrice,[randomFeature,randomFeature2,randomFeature3])
-      roomsFunctions.validateAvailableRoom(randomCategory,randomNumber,randomFloor,'true',randomFeature)
+      newRoomFunctions.createAvailableRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3])
+      roomsFunctions.validateAvailableRoom(randomCategory, randomNumber, randomFloor, 'true', randomFeature)
       cy.wait(1000)
 
    })
 
    it("Edit a room", () => {
       indexFunctions.openRoomsPage('Rooms')
-      editRoomsFunctions.editLastRoom(randomCategory,randomNumber,randomFloor,randomPrice,[randomFeature,randomFeature2,randomFeature3],'Rooms')
+      editRoomsFunctions.editLastRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3], 'Rooms')
 
    });
-
-
-
-
-
-
-   afterEach(() => {
-      headerFunctions.performLogout()
-
-   });
-
 
 });
 
