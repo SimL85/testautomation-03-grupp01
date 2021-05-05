@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+
 // login page elements
 const HEADER_TITLE = '.router-link-active'
 const USERNAME_TEXTFIELD = ':nth-child(1) > input'
