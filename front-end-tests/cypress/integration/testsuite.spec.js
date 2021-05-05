@@ -26,16 +26,6 @@ import * as targets from "../targets/targets"
 
 var faker = require('faker');
 
-let randomName = faker.name.findName();
-let randomMail = faker.internet.email();
-let randomPhone = faker.phone.phoneNumber();
-
-let randomName2 = faker.name.findName();
-let randomMail2 = faker.internet.email();
-let randomPhone2 = faker.phone.phoneNumber();
-//let checkbox = " ✓ "    // "baseUrl": "http://localhost:3000",
-
-
 let randomCategory = faker.random.arrayElement(["double", "single", "twin"]);
 let randomNumber = faker.datatype.number({ min: 1, max: 1000 })
 let randomFloor = faker.datatype.number({ min: 1, max: 50 })
@@ -63,27 +53,20 @@ describe("Testsuite", () => {
    });
 
 
-   it.only('Create a room ', () => {
-      indexFunctions.openRoomsPage()
+   it('Create a room ', () => {
+      indexFunctions.openRoomsPage('Rooms')
       roomsFunctions.openNewRoomPage()
       cy.wait(1000)
       newRoomFunctions.createAvailableRoom(randomCategory,randomNumber,randomFloor,randomPrice,[randomFeature,randomFeature2,randomFeature3])
       roomsFunctions.validateAvailableRoom(randomCategory,randomNumber,randomFloor,'true',randomFeature)
       cy.wait(1000)
-      
+
    })
 
    it("Edit a room", () => {
-      indexPage.viewRooms('Rooms')
-      roomsPage.verifyEditLastRoom('Room:')
-      roomEditPage.editRoom('1230', '12', 'Rooms')
-      cy.wait(1000)
-      cy.percySnapshot('Edit a room')
-      cy.wait(1000)
-      roomsPage.verifyLastRoom('twin', '1230', '12', '4000', 'balcony')
-      cy.wait(1000)
-      cy.percySnapshot('Verify edit a room')
-      cy.wait(1000)
+      indexFunctions.openRoomsPage('Rooms')
+      editRoomsFunctions.editLastRoom(randomCategory,randomNumber,randomFloor,randomPrice,[randomFeature,randomFeature2,randomFeature3],'Rooms')
+
    });
 
 
