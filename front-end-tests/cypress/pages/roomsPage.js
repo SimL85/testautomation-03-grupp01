@@ -6,12 +6,6 @@
 
 const CREATE_ROOM_BUTTON = 'h2 > .btn'
 const ROOMS_LIST = '.rooms'
-const FEATURES_LIST = [ 'balcony',
-                        'ensuite',
-                        'sea view',
-                        'penthouse'
-                    ]
-
 const MEATBALLS_BUTTON = '.action'
 const DELETE_BUTTON = '.menu > :nth-child(2)'
 
@@ -24,19 +18,13 @@ function openNewRoomPage(){
 }
 
 function validateAvailableRoom(category, number, floor, available, features){
-    cy.log(category)
-    cy.log(number)
-    cy.log(floor)
-    cy.log(features)
-    cy.log(FEATURES_LIST[features])
-    let feature = FEATURES_LIST[features]
-    cy.log(feature)
-    cy.get(ROOMS_LIST)
+   
+    cy.get(ROOMS_LIST).last()
         .should('contain', category)
         .and('contain', number)
         .and('contain', floor)
         .and('contain', available)
-        .and('contain', FEATURES_LIST[features])
+        .and('contain', features)
 }
 
 function removeLastRoom(){
