@@ -28,7 +28,7 @@ function validateCreatedClient(name, email, telephone){
 }
 
 function validateEditLastClient(content) {
-    cy.get(THREE_DOTS_BTN).last().click()
+    cy.get(MEATBALLS_BUTTON).last().click()
     cy.get(EDIT_BTN).click()
     cy.contains(content)
 }

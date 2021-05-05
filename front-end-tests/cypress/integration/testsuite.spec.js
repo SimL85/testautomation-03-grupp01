@@ -20,51 +20,109 @@ import * as editBillsFunctions from "../pages/editBillsPage";
 import * as editClientsFunctions from "../pages/editClientsPage";
 import * as targets from "../targets/targets";
 
+
 //-----------------------------------------------------------------//
 //                          variables                              //
 //-----------------------------------------------------------------//
 
-var faker = require("faker");
 
-// Anna //
-
-var faker = require("faker");
+var faker = require('faker');
 
 let randomName = faker.name.findName();
 let randomEmail = faker.internet.email().toLowerCase();
 let randomPhone = faker.phone.phoneNumber();
 let billValue = faker.datatype.number({ min: 500, max: 1000 });
+  
+let randomCategory = faker.random.arrayElement(["double", "single", "twin"]);
+let randomNumber = faker.datatype.number({ min: 1, max: 1000 })
+let randomFloor = faker.datatype.number({ min: 1, max: 50 })
+let randomPrice = faker.datatype.number({ min: 1000, max: 10000 })
+let randomFeature = faker.random.arrayElement(["balcony", "ensuite", "sea_view", "penthouse"]);
 
+let randomCategory2 = faker.random.arrayElement(["double", "single", "twin"]);
+let randomNumber2 = faker.datatype.number({ min: 1, max: 1000 })
+let randomFloor2 = faker.datatype.number({ min: 1, max: 50 })
+let randomPrice2 = faker.datatype.number({ min: 1000, max: 10000 })
+let randomFeature2 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
+let randomFeature3 = faker.random.arrayElement(['balcony', 'ensuite', 'sea_view', 'penthouse']);
+  
+let start = faker.date.between("2020-12-01", "2020-12-31").toISOString();
+let end = faker.date.between("2021-01-01", "2021-01-31").toISOString();
+let start_date = start.toString().substring(0, 10);
+let end_date = end.toString().substring(0, 10);
+  
 let category = faker.datatype.number({ min: 0, max: 2 });
 let floor = faker.datatype.number({ min: 1, max: 10 });
 let roomNumber = faker.datatype.number({ min: 1, max: 20 }) + floor * 100;
 let features = faker.datatype.number({ min: 0, max: 3 });
 let price = faker.datatype.number({ min: 2, max: 5 }) * 100 * floor + features * 500;
 
-let start = faker.date.between("2020-12-01", "2020-12-31").toISOString();
-let end = faker.date.between("2021-01-01", "2021-01-31").toISOString();
-let start_date = start.toString().substring(0, 10);
-let end_date = end.toString().substring(0, 10);
-
 //-----------------------------------------------------------------//
 //                          test cases                             //
 //-----------------------------------------------------------------//
 
 describe("Testsuite", () => {
+
    beforeEach(() => {
-      cy.visit("/");
-      loginFunctions.checkElements();
-      loginFunctions.validLogin(
-         targets.username,
-         targets.password,
-         "Tester Hotel Overview"
-      );
+      cy.visit('/')
+      loginFunctions.checkElements()
+      loginFunctions.validLogin(targets.username, targets.password, "Tester Hotel Overview")
+
    });
 
    afterEach(() => {
-      headerFunctions.performLogout();
+      headerFunctions.performLogout()
+
    });
 
+
+   /// TESTS FOR CLIENTS ///
+
+   it("Create a new client", () => {
+      indexFunctions.openClientsPage()
+      clientsFunctions.openNewClientPage()
+      newClientFunctions.validateNewClientPage()
+      newClientFunctions.createNewClient(randomName, randomMail, randomPhone)
+      clientsFunctions.validateCreatedClient(randomName, randomMail, randomPhone)
+
+      cy.wait(500)
+   });
+
+
+
+   it("Edit last client", () => {
+      indexFunctions.openClientsPage()
+      editClientsFunctions.editClient(randomName2, randomMail2, randomPhone2, "Clients")
+      clientsFunctions.validateCreatedClient(randomName2, randomMail2, randomPhone2)
+
+      cy.wait(500)
+   });
+
+
+   it("Delete last client", () => {
+      indexFunctions.openClientsPage("Clients")
+      clientsFunctions.removeLastClient()
+
+      cy.wait(500)
+   });
+
+
+   it('Create a room ', () => {
+      indexFunctions.openRoomsPage('Rooms')
+      roomsFunctions.openNewRoomPage()
+      cy.wait(1000)
+      newRoomFunctions.createAvailableRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3])
+      roomsFunctions.validateAvailableRoom(randomCategory, randomNumber, randomFloor, 'true', randomFeature)
+      cy.wait(1000)
+
+   })
+
+   it("Edit a room", () => {
+      indexFunctions.openRoomsPage('Rooms')
+      editRoomsFunctions.editLastRoom(randomCategory, randomNumber, randomFloor, randomPrice, [randomFeature, randomFeature2, randomFeature3], 'Rooms')
+
+   });
+  
    it("Validate dashboard presence and content on all pages in the application", () => {
       cy.log("checking the dashboard");
       indexFunctions.openClientsPage();
@@ -136,6 +194,5 @@ describe("Testsuite", () => {
       cy.wait(1000)
       headerFunctions.backToIndex()
    })
-
 
 });
