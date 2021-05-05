@@ -1,26 +1,8 @@
 /// <reference types="cypress" />
 
-//-----------------------------------------------------------------//
-//                          imports                                //
-//-----------------------------------------------------------------//
-import * as loginFunctions from '../../pages/loginPage'
-import * as headerFunctions from '../../pages/headerPage'
-import * as indexFunctions from '../../pages/indexPage'
-import * as clientsFunctions from '../../pages/clientsPage'
-import * as newClientFunctions from '../../pages/newClientPage'
-import * as billsFunctions from '../../pages/billsPage'
-import * as newBillFunctions from '../../pages/newBillPage'
-import * as roomsFunctions from '../../pages/roomsPage'
-import * as newRoomFunctions from '../../pages/newRoomPage'
-import * as reservationsFunctions from '../../pages/reservationsPage'
-import * as newReservationFunctions from '../../pages/newReservationPage'
 
-//-----------------------------------------------------------------//
-//                          variables                              //
-//-----------------------------------------------------------------//
 
-const USERNAME = 'tester01';
-const PASSWORD = 'GteteqbQQgSr88SwNExUQv2ydb7xuf8c';
+
 
 var faker = require('faker');
 
