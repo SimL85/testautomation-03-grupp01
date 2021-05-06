@@ -16,7 +16,7 @@ participants: Anna Brundin / Ivan Ignatkov / Simone Lentini
 1. Consistency in naming files, functions / methods, variables. Use descriptive names and comment as needed.
 2. Use Page Objects design pattern
 3. Explain your code as kindly as possible.
-4. DON'T RUIN MY PRECIUOS CODE!
+4. DON'T RUIN MY PRECIOUS CODE!
 ---------------------------------------------------------------------------------------------------------------------
 
                                                   Conduct
