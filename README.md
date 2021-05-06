@@ -5,7 +5,7 @@ participants: Anna Brundin / Ivan Ignatkov / Simone Lentini
                                                 
                                                   Git Hub
 --------------------------------------------------------------------------------------------------------------------
-1. Never push to main, always work on your own branch and merge responcibly! 
+1. Never push to main, always work on your own branch and merge responsibly! 
 2. When naming branches, use the following convention - "first name""number increased incrementally with every new branch"
 3. Use descriptive comments for your commits
 4. We all work together, we merge in agreement!
